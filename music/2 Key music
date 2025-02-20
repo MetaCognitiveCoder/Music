@@ -1,0 +1,62 @@
+import pygame
+
+pygame.mixer.init()
+
+sound1 = pygame.mixer.Sound("music/kick.wav")
+sound2 = pygame.mixer.Sound("music/snare.wav")
+sound3 = pygame.mixer.Sound("music/Hat.wav")
+sound4 = pygame.mixer.Sound("music/tom.wav")
+
+pygame.init()
+pygame.display.set_caption("Mini Drum Pad")
+screen = pygame.display.set_mode((440, 100))
+
+# Define colors
+Red = (255, 0, 0)
+BLUE = (0, 0, 255)
+black = (0,0,0)
+pink = (255,0,255)
+
+red_box = pygame.Rect(0, 0, 110, 110) 
+blue_box = pygame.Rect(110, 0, 110, 110)
+black_box = pygame.Rect(220, 0, 110, 110)
+pink_box = pygame.Rect(330,0,110,110)
+
+font = pygame.font.SysFont('Arial', 30)
+
+# Define the text
+text1 = font.render('1.Kick', True, (255, 255,255))
+text2 = font.render('2.Snare', True, (255, 255,255))
+text3 = font.render('3.Hat', True, (255, 255,255))
+text4 = font.render('4.Tom', True, (255, 255,255))
+
+
+
+screen.fill((255, 255, 255))
+
+pygame.draw.rect(screen, Red, (0, 0, 110, 110))  # Red box
+pygame.draw.rect(screen, BLUE, (110, 0, 110, 110))  # Blue box
+pygame.draw.rect(screen, black, (220, 0, 110, 110)) # Black box
+pygame.draw.rect(screen, pink, (330, 0, 110, 110)) # pink box
+
+screen.blit(text1, red_box)
+screen.blit(text2, blue_box)
+screen.blit(text3, black_box)
+screen.blit(text4, pink_box)
+
+pygame.display.flip()  # Update the display
+
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif (event.type == pygame.MOUSEBUTTONDOWN and red_box.collidepoint(pygame.mouse.get_pos()))or (event.type == pygame.KEYDOWN and event.key == pygame.K_1):
+            sound1.play()       
+        elif (event.type == pygame.MOUSEBUTTONDOWN and blue_box.collidepoint(pygame.mouse.get_pos()))or (event.type == pygame.KEYDOWN and event.key == pygame.K_2):
+            sound2.play()
+        elif (event.type == pygame.MOUSEBUTTONDOWN and black_box.collidepoint(pygame.mouse.get_pos()))or (event.type == pygame.KEYDOWN and event.key == pygame.K_3):
+            sound3.play()
+        elif (event.type == pygame.MOUSEBUTTONDOWN and pink_box.collidepoint(pygame.mouse.get_pos()))or (event.type == pygame.KEYDOWN and event.key == pygame.K_4):
+            sound4.play()
